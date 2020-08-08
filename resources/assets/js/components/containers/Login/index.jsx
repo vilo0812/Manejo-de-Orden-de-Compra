@@ -25,7 +25,7 @@ import {
   const useStyles = makeStyles(theme => ({
     loginCard: {
       margin: '0',
-      height : '720px',
+      minHeight: '720px',
     },
     cardImg:{
       backgroundImage : "url('./../../images/backgrounds/compras.jpg')",
@@ -33,7 +33,7 @@ import {
       backgroundPosition: 'center',
     },
     cardMargin:{
-      marginTop:'10px'
+      // marginTop:'10px'
     },
     btnActions:{
       color: blue[400],

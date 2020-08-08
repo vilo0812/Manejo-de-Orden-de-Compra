@@ -36,7 +36,11 @@ const RegisterBox = () => {
   const [inputs, setInputs] = useState({
     email:'',
     password:'',
-    name:''
+    repetPassword:'',
+    first_name:'',
+    last_name:'',
+    identification_card:'',
+    phone:''
   })
   const [error, setError] = useState({
     status:'',
@@ -51,21 +55,61 @@ const RegisterBox = () => {
       error:false,
       message:''
     },
-    nameError : {
+    first_nameError : {
       error:false,
       message:'',
-    }
+    },
+    last_nameError : {
+      error:false,
+      message:'',
+    },
+    icError : {
+      error:false,
+      message:'',
+    },
+    phoneError : {
+      error:false,
+      message:'',
+    },
+    repetPasswordError : {
+      error:false,
+      message:'',
+    },
   });
 //start uses
 //start handles
 // start inputs handles
   const handleInputs = event => {
-     if(event.target.name === 'name'){
+     if(event.target.name === 'first_name'){
       setInputs({
         ...inputs,
-        name:event.target.value
+        first_name:event.target.value
       })
-     }else if(event.target.name === 'email'){
+     }else if(event.target.name === 'last_name'){
+      setInputs({
+        ...inputs,
+        last_name:event.target.value
+      })
+     }
+     else if(event.target.name === 'ic'){
+      setInputs({
+        ...inputs,
+        identification_card:event.target.value
+      })
+     }
+     else if(event.target.name === 'phone'){
+      setInputs({
+        ...inputs,
+        phone:event.target.value
+      })
+     }
+     else if(event.target.name === 'repetPassword'){
+      setInputs({
+        ...inputs,
+        repetPassword:event.target.value
+      })
+     }
+     else if(event.target.name === 'email'){
       setInputs({
         ...inputs,
         email:event.target.value
@@ -82,9 +126,7 @@ const RegisterBox = () => {
 // start methods
 //start validation
 const validation = () => {
-  let errorName = false;
-  let errorEmail = false;
-  let errorPassword = false;
+  let error = false;
   setValidationInputs(false);
   setInputsErrors({
     emailError:{
@@ -95,39 +137,100 @@ const validation = () => {
       error:false,
       message:''
     },
-    nameError : {
+    first_nameError : {
       error:false,
       message:'',
-    }
+    },
+    last_nameError : {
+      error:false,
+      message:'',
+    },
+    icError : {
+      error:false,
+      message:'',
+    },
+    phoneError : {
+      error:false,
+      message:'',
+    },
+    repetPasswordError : {
+      error:false,
+      message:'',
+    },
   })
-  if(inputs.name.length == 0){//vemos si nombre esta lleno
+  if(inputs.first_name.length == 0){//vemos si nombre esta lleno
     setInputsErrors({
       ...inputsErrors,
-        nameError:{
+        first_nameError:{
         error:true,
         message:'nombre obligatorio'
       },
     })
-    errorName = true;
-  }if(inputs.email.length == 0){//vemos si email esta lleno
+    error = true;
+  }
+  if(inputs.last_name.length == 0){//vemos si Apellido esta lleno
+    setInputsErrors({
+      ...inputsErrors,
+        last_nameError:{
+        error:true,
+        message:'apellido obligatorio'
+      }
+    })
+    error = true;
+  }
+  if(inputs.identification_card.length == 0){//vemos si cedula esta lleno
+    setInputsErrors({
+      ...inputsErrors,
+        icError:{
+        error:true,
+        message:'cédula obligatoria'
+      }
+    })
+    error = true;
+  }
+  if(inputs.phone.length == 0){//vemos si télefono esta lleno
+    setInputsErrors({
+      ...inputsErrors,
+        phoneError:{
+        error:true,
+        message:'télefono obligatoria'
+      }
+    })
+    error = true;
+  }
+  if(inputs.email.length == 0){//vemos si email esta lleno
     setInputsErrors({
       ...inputsErrors,
         emailError:{
         error:true,
         message:'correo obligatorio'
-      },
+      }
     })
-    errorEmail = true;
-  }if(inputs.password.length == 0){//vemos si clave esta lleno
+    error = true;
+  }
+  if(inputs.password.length == 0){//vemos si clave esta lleno
     setInputsErrors({
       ...inputsErrors,
         passwordError:{
         error:true,
         message:'clave obligatoria'
-      },
+      }
+
     })
-    errorPassword = true;
-  }else if(inputs.password.length < 3){//vemos si calve es menor a 3 esta lleno
+    error = true;
+  }
+  if(inputs.repetPassword.length == 0){//vemos si repetir Clave esta lleno
+    setInputsErrors({
+      ...inputsErrors,
+        repetPasswordError:{
+        error:true,
+        message:'repetir la clave es obligatorio'
+      }
+
+    })
+    error = true;
+  }
+  else if(inputs.password.length < 3){//vemos si calve es menor a 3 esta lleno
     setInputsErrors({
       ...inputsErrors,
         passwordError:{
@@ -135,9 +238,25 @@ const validation = () => {
         message:'clave invalida'
       },
     })
-    errorPassword = true;
+    error = true;
   }
-  if(!errorPassword && !errorEmail && !errorName){
+  if(inputs.repetPassword != inputs.password){
+  setInputsErrors({
+    ...inputsErrors,
+    passwordError:{
+      error:true,
+      message:'las claves no coinciden'
+    },
+    repetPasswordError:{
+      error:true,
+      message:'las claves no coinciden'
+    }
+  })
+  error = true;
+  error = true;
+  // error = true;
+  }
+  if(!error){
     setValidationInputs(true)
   }
 }
@@ -192,14 +311,46 @@ const validation = () => {
     ) : (
     <Box>
       <Box my={3}>
-        <TextField type="text" onChange={(e) =>handleInputs(e)} fullWidth id="name" key="name" label="Nombre" variant="outlined" name="name" error={inputsErrors.nameError.error} helperText={inputsErrors.nameError.message}/>
+        <TextField type="text" onChange={(e) =>handleInputs(e)} fullWidth id="first_name" key="first_name" label="Nombre" variant="outlined" name="first_name" error={inputsErrors.first_nameError.error} helperText={inputsErrors.first_nameError.message}/>
+      </Box>  
+      <Box my={3}>
+        <TextField type="text" onChange={(e) =>handleInputs(e)} fullWidth id="last_name" key="last_name" label="Apellido" variant="outlined" name="last_name" error={inputsErrors.last_nameError.error} helperText={inputsErrors.last_nameError.message}/>
+      </Box>  
+      <Box my={3}>
+        <TextField type="text" onChange={(e) =>handleInputs(e)} fullWidth id="ic" key="ic" label="Cédula" variant="outlined" name="ic" error={inputsErrors.icError.error} helperText={inputsErrors.icError.message}/>
+      </Box>  
+      <Box my={3}>
+        <TextField type="text" onChange={(e) =>handleInputs(e)} fullWidth id="phone" key="phone" label="Télefono" variant="outlined" name="phone" error={inputsErrors.phoneError.error} helperText={inputsErrors.phoneError.message}/>
       </Box>  
       <Box my={3}>
         <TextField type="email" onChange={(e) =>handleInputs(e)} fullWidth id="email" key="email" label="Correo" variant="outlined" name="email" error={inputsErrors.emailError.error} helperText={inputsErrors.emailError.message}/>
       </Box>  
       <Box my={3}>
-        <TextField type="password" onChange={(e) =>handleInputs(e)} fullWidth id="password" key="password" label="Clave" variant="outlined" name="password" error={inputsErrors.passwordError.error} helperText={inputsErrors.passwordError.message}/>
+        <TextField 
+        type="password" 
+        onChange={(e) =>handleInputs(e)} 
+        fullWidth 
+        id="password" 
+        key="password" 
+        label="Clave" 
+        variant="outlined" 
+        name="password" 
+        error={inputsErrors.passwordError.error}
+         helperText={inputsErrors.passwordError.message}/>
       </Box>  
+       <Box my={3}>
+         <TextField 
+        type="password" 
+        onChange={(e) =>handleInputs(e)} 
+        fullWidth 
+        id="repetPassword" 
+        key="repetPassword" 
+        label="Repetir Clave" 
+        variant="outlined" 
+        name="repetPassword" 
+        error={inputsErrors.repetPasswordError.error} 
+        helperText={inputsErrors.repetPasswordError.message}/>
+      </Box>   
       <Box  my={3}>
         <Button onClick={() => register()} fullWidth={true} variant="contained" color="primary" >
                 Registrarse

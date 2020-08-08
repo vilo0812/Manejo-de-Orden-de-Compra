@@ -19,6 +19,8 @@ const store = generateStore();
 
 import Home from './../components/containers/Home'
 import Login from './../components/containers/Login'
+import NavBar from './../components/NavBar'
+import SideBar from './../components/SideBar'
 // start useStyles
 const useStyles = makeStyles((theme) => ({
   spinning: {
@@ -33,6 +35,7 @@ const [login, setLogin] = React.useState(true)
 const [loading, setLoading] = React.useState(true)
 // const dispatch = useDispatch()
 // start uses
+const [toogleSideBar,setToogleSideBar] = React.useState(false)
 React.useEffect(() => {
     const fetchUser = async () => {
 	      const user = await JSON.parse(localStorage.getItem('user'))
@@ -48,10 +51,27 @@ React.useEffect(() => {
     fetchUser()
   }, [])
 // start Components
+// start methods
+const tool = () => {
+  setToogleSideBar(!toogleSideBar)
+}
+const toggleDrawer = (anchor, open) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setToogleSideBar(open)
+  };
+// end methods
 //start protegemos las rutas
  const RouteProtec = ({component, path, ...rest}) => {
     if(login){
-        return <Route component={component} path={path} {...rest} />
+        return (
+        <div>
+        <NavBar tool={tool}/>
+        <SideBar toggleDrawer={toggleDrawer} toogleSideBar={toogleSideBar}/>
+       	<Route component={component} path={path} {...rest} />
+       	</div>
+       );
     }else{
       return <Redirect to="/auth" {...rest} />
     }

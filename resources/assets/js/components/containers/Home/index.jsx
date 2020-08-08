@@ -15,26 +15,17 @@ import {
   	}
   }))
 //end useStyles
-const Home = ({history}) => {
+const Home = () => {
   //start uses
   const dispatch = useDispatch();
   //end uses
- // start methods
-  const logout = () => {
-    dispatch(cerrarSessionAction())
-    history.push('/auth')
-  }
-// end methods
 //start uses
 	const classes = useStyles()
 //start uses
    return(
     <Fragment>
-             <h1 className={classes.fondo}>Home 
+             <h1>Home 
              </h1>
-            <Button variant="contained" onClick={()=>logout()}>
-              Link
-            </Button>
     </Fragment>
    );
 

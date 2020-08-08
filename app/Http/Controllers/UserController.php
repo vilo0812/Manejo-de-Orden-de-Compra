@@ -35,7 +35,10 @@ class UserController extends Controller
 
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|between:2,100',
+            'first_name' => 'required|required|string|between:2,100',
+            'last_name' => 'required|string|between:2,100',
+            'phone' => 'required|string|between:2,100',
+            'identification_card' => 'required|string|between:2,12',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:3',
         ]);
@@ -48,7 +51,6 @@ class UserController extends Controller
                     $validator->validated(),
                     ['password' => bcrypt($request->password)]
                 ));
-
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
