@@ -13,8 +13,10 @@ class DatabaseSeeder extends Seeder
     {
     $this->truncateTable([
         'users',
+        'providers'
         ]);
         $this->call(UserSeeder::class);
+        $this->call(ProviderSeeder::class);
     }
     public function truncateTable(array $tables){
       DB::statement('SET FOREIGN_KEY_CHECKS = 0;');

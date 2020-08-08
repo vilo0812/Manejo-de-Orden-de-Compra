@@ -19,6 +19,10 @@ const store = generateStore();
 
 import Home from './../components/containers/Home'
 import Login from './../components/containers/Login'
+import Providers from './../components/containers/Providers'
+import Categories from './../components/containers/Categories'
+import Products from './../components/containers/Products'
+import Invoices from './../components/containers/Invoices'
 import NavBar from './../components/NavBar'
 import SideBar from './../components/SideBar'
 // start useStyles
@@ -26,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
   spinning: {
       marginLeft: theme.spacing(4),
   },
+  backgroundTest:{
+      backgroundImage : "url('./../../images/backgrounds/fondo_test.jpg')",
+      backgroundSize:'cover',
+      backgroundPosition: 'center',
+      minHeight : '700px'
+    },
 }));
 //end useStyles
 const Routes= () => {
@@ -66,10 +76,10 @@ const toggleDrawer = (anchor, open) => (event) => {
  const RouteProtec = ({component, path, ...rest}) => {
     if(login){
         return (
-        <div>
-        <NavBar tool={tool}/>
-        <SideBar toggleDrawer={toggleDrawer} toogleSideBar={toogleSideBar}/>
-       	<Route component={component} path={path} {...rest} />
+        <div className={classes.backgroundTest}>
+	        <NavBar tool={tool}/>
+	        <SideBar tool={tool} toggleDrawer={toggleDrawer} toogleSideBar={toogleSideBar}/>
+	       	<Route component={component} path={path} {...rest} />
        	</div>
        );
     }else{
@@ -100,6 +110,10 @@ const toggleDrawer = (anchor, open) => (event) => {
 		<Router>
 			<Switch>	
 		        <RouteProtec path="/" component={Home} exact/>
+		        <RouteProtec path="/Providers" component={Providers} exact/>
+		        <RouteProtec path="/categories" component={Categories} exact/>
+		        <RouteProtec path="/products" component={Products} exact/>
+		        <RouteProtec path="/invoices" component={Invoices} exact/>
 		        <Route path="/auth" component={Login} />
 		    </Switch>
 		</Router>

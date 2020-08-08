@@ -18,16 +18,17 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import {Link} from 'react-router-dom'
 //start useStyles
 import {
-  deepOrange,
+  orange,
 } from '@material-ui/core/colors';
 const drawerWidth = 300;  
 	const useStyles = makeStyles(theme => ({
 		list: {
 	    color: 'black',
       height : '100%',
-      background : deepOrange[700]
+      background : orange[700]
 
 	  },
     line:{
@@ -61,7 +62,7 @@ const drawerWidth = 300;
     toolbar: theme.mixins.toolbar,
 	}))
 //end useStyles
-const SideBar = ({toogleSideBar,toggleDrawer}) => {
+const SideBar = ({toogleSideBar,toggleDrawer,tool}) => {
 //start uses
 const [open, setOpen] = React.useState(false);
 	const classes = useStyles()
@@ -76,12 +77,14 @@ const [open, setOpen] = React.useState(false);
     variant="temporary"
     >
         <List component="ul" className={classes.list}>
-        <ListItem button className={classes.itemButton}>
+        <Link to="/">
+        <ListItem button className={classes.itemButton} onClick={()=>tool()}>
           <HomeIcon/>
           <ListItemText className={classes.itemText}>
             Inicio
           </ListItemText>
         </ListItem>
+        </Link>
         <Divider light={true}/>
         <ListItem button className={classes.itemButton} onClick={() => setOpen(!open)}>
           <AccessibilityNewIcon/>
@@ -92,32 +95,40 @@ const [open, setOpen] = React.useState(false);
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding className={classes.list,classes.itemText}>
-            <ListItem button button className={classes.itemButton}>
+            <Link to="/providers">
+            <ListItem button className={classes.itemButton} onClick={()=>tool()}>
                 <StarBorder />
               <ListItemText className={classes.itemText}>
                 Proveedores
               </ListItemText>
             </ListItem>
-            <ListItem button button className={classes.itemButton}>
+            </Link>
+            <Link to="/categories">
+            <ListItem button className={classes.itemButton} onClick={()=>tool()}>
                 <StarBorder />
               <ListItemText className={classes.itemText}>
                 Categorias
               </ListItemText>
             </ListItem>
+            </Link>
           </List>
         </Collapse>
-        <ListItem button className={classes.itemButton}>
+        <Link to="/products">
+        <ListItem button className={classes.itemButton} onClick={()=>tool()}>
           <BookIcon/>
           <ListItemText className={classes.itemText}>
             Administración de Productos
           </ListItemText>
         </ListItem>
-        <ListItem button className={classes.itemButton}>
+        </Link>
+        <Link to="/invoices">
+        <ListItem button className={classes.itemButton} onClick={()=>tool()}>
           <LibraryBooksIcon/>
           <ListItemText className={classes.itemText}>
             Órden de Facturación
           </ListItemText>
         </ListItem>
+         </Link>
         <Divider></Divider>
       </List>
     </Drawer>

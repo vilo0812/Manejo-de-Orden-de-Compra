@@ -12,13 +12,14 @@ import { useHistory } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
-  deepOrange,
+  orange,
+  
 } from '@material-ui/core/colors';
 //start useStyles
   const useStyles = makeStyles(theme => ({
   	root: {
     flexGrow: 1,
-    background : deepOrange[500]
+    background : orange[500]
   },
   menuButton: {
     marginRight: theme.spacing(2),

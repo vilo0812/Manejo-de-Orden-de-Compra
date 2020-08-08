@@ -13,3 +13,9 @@ Route::group([
     Route::post('logout', 'UserController@logout');
     Route::put('newPassword', 'UserController@newPassword');
 });
+	Route::post('providers', 'ProvidersController@store');
+Route::group([
+    'middleware' => 'jwt.auth',
+], function ($router) {
+	Route::get('providers', 'ProvidersController@index');
+});

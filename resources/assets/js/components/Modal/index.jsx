@@ -13,32 +13,29 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2, 4, 3),
-    minHeight : '300px'
+    minHeight : '500px'
   },
 }));
-const MyModal = ({children}) => {
+const MyModal = ({children,handleModal,open}) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={handleClose}
+        onClose={()=>handleModal()}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
