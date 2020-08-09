@@ -40,25 +40,23 @@ function createData(name, calories, fat, carbs, protein) {
 //   createData('Gingerbread', 356, 16.0, 49, 3.9),
 // ];
 
-export default function SimpleTable({columns,data}) {
+export default function SimpleTable({columns,data,editing,removing}) {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper} className={classes.root}>
       <Table className={classes.table} aria-label="simple table">
-        <TableHead>
+      <TableHead>
           <TableRow>
-          {columns.map((item,index) => (
-              <TableCell key={index} component="th" scope="row">
-                {item}
+            {columns.map((item) => (
+                  <TableCell key={item}>{item}</TableCell>
+            ))}
+              <TableCell>
+              editar
               </TableCell>
-          ))}
-          <TableCell component="th" scope="row">
-          editar
-          </TableCell>
-          <TableCell component="th" scope="row">
-          eliminar
-          </TableCell>
+              <TableCell>
+              eliminar
+              </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -72,15 +70,15 @@ export default function SimpleTable({columns,data}) {
                 <TableCell key={index} component="th" scope="row">{item}</TableCell>
                   ))}
                 <TableCell component="th" scope="row">
-                  <Button variant="contained" className={classes.warning}>
+                  <Button variant="contained" className={classes.warning} onClick={()=>editing(row.id,row.rows)}>
                     editar
                   </Button>
                   </TableCell>
-                  <TableCell component="th" scope="row">
-                  <Button variant="contained" color="secondary">
+                <TableCell component="th" scope="row">
+                  <Button variant="contained" color="secondary" onClick={()=>removing(row.id)}>
                     eliminar
                   </Button>
-                  </TableCell>
+                </TableCell>
             </TableRow>
            ))
         }

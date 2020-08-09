@@ -15,7 +15,7 @@ class ProvidersController extends Controller
      */
     public function index()
     {
-    $providers= Providers::all();
+    $providers= Providers::orderBy('id', 'DESC')->get();
     return response()->json($providers,200);
     }
 
@@ -87,7 +87,14 @@ class ProvidersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $prov = Providers::findOrFail($id);
+        $prov->name=$request->name;
+        $prov->address=$request->address;
+        $prov->phone=$request->phone;
+        $prov->email=$request->email;
+        $prov->rif=$request->rif;
+        $prov->save();
+        return response()->json(['mensaje'=>'actualización exitosa'],200);
     }
 
     /**
@@ -98,6 +105,8 @@ class ProvidersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $prov = Providers::findOrFail($id);
+        $prov->delete();
+        return response()->json(['mensaje'=>'usuario eliminado exitosamente'],200);
     }
 }
