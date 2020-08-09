@@ -107,6 +107,6 @@ class ProvidersController extends Controller
     {
         $prov = Providers::findOrFail($id);
         $prov->delete();
-        return response()->json(['mensaje'=>'usuario eliminado exitosamente'],200);
+        return response()->json(['mensaje'=>'Proveedor eliminado exitosamente'],200);
     }
 }

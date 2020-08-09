@@ -310,7 +310,7 @@ const validation = () => {
                 </Alert>
               }
               <Box  my={3}>
-                <Button onClick={() => register()} fullWidth={true} variant="contained" color="primary" >
+                <Button disabled={loading} onClick={() => register()} fullWidth={true} variant="contained" color="primary" >
                        {Edit.editing ? 'Editar Proveedor' : 'Registrar Proveedor'} 
                 </Button>
               </Box>
