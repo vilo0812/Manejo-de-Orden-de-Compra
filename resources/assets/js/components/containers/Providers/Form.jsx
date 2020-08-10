@@ -215,6 +215,7 @@ const validation = () => {
     if(Edit.editing){
     	try {
             const res = await axios.put(`/api/providers/${Edit.id}`,inputs);
+              handleModal ();
             Swal.fire({
               position: 'top-end',
               icon: 'success',
@@ -222,7 +223,6 @@ const validation = () => {
               showConfirmButton: false,
               timer: 1000
             }).then(res => {
-              handleModal ();
               fetchProviders();
             })
 	      } catch (error) {

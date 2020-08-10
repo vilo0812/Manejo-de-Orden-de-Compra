@@ -16,8 +16,8 @@ class CreateTaxesTable extends Migration
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
             $table->string('rate_type');
-            $table->string('name');
-            $table->string('value');
+            $table->string('tax_name');
+            $table->float('value', 8, 2);
         });
     }
 

@@ -14,11 +14,15 @@ class DatabaseSeeder extends Seeder
     $this->truncateTable([
         'users',
         'providers',
-        'categories'
+        'categories',
+        'taxes',
+        'products'
         ]);
         $this->call(UserSeeder::class);
         $this->call(ProviderSeeder::class);
         $this->call(CategoriesSeeder::class);
+        $this->call(TaxesSeeder::class);
+        $this->call(ProductsSeeder::class);
     }
     public function truncateTable(array $tables){
       DB::statement('SET FOREIGN_KEY_CHECKS = 0;');

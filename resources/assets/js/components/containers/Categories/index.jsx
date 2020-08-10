@@ -88,7 +88,7 @@ const fetchCategories = async () => {
         {
           id:item.id,
           rows:[
-          item.name,
+          item.category_name,
           item.code,
           ]
         }

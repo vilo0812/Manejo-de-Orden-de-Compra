@@ -60,7 +60,7 @@ const classes = useStyles()
     error:false
   });
 const [inputs, setInputs] = useState({//inputs
-		name:'',
+		category_name:'',
 	    code:'',
   })
   const [nameError, setNameError] = useState({
@@ -74,12 +74,12 @@ const [inputs, setInputs] = useState({//inputs
  React.useEffect(() => {
   if(Edit.editing){
   	setInputs({
-	    name:Edit.categories[0],
+	    category_name:Edit.categories[0],
 	    code:Edit.categories[1],
 	})
 	}else{
 	setInputs({
-		name:'',
+		category_name:'',
 	  code:''
 	})
 	}
@@ -90,7 +90,7 @@ const [inputs, setInputs] = useState({//inputs
      if(event.target.name === 'name'){
       setInputs({
         ...inputs,
-        name:event.target.value
+        category_name:event.target.value
       })
      }else if(event.target.name === 'code'){
       setInputs({
@@ -155,8 +155,8 @@ const validation = () => {
 	        }
     }else{
       try {
-
             const res = await axios.post('/api/categories',inputs);
+              handleModal ();
             Swal.fire({
               position: 'top-end',
               icon: 'success',
@@ -164,7 +164,6 @@ const validation = () => {
               showConfirmButton: false,
               timer: 1000
             }).then(res => {
-              handleModal ();
               fetchCategories();
             })
       } catch (error) {

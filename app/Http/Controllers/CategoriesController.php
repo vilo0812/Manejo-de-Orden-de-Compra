@@ -37,7 +37,7 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
+            'category_name' => 'required|string|between:2,100',
             'code' => 'required|string|between:2,100',
         ]);
 
@@ -84,7 +84,7 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $cat = Categories::findOrFail($id);
-        $cat->name=$request->name;
+        $cat->category_name=$request->category_name;
         $cat->code=$request->code;
         $cat->save();
         return response()->json(['mensaje'=>'actualización exitosa'],200);

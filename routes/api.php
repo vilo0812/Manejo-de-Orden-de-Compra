@@ -13,7 +13,6 @@ Route::group([
     Route::post('logout', 'UserController@logout');
     Route::put('newPassword', 'UserController@newPassword');
 });
-Route::put('categories/{id}', 'CategoriesController@update');
 Route::group([
     'middleware' => 'jwt.auth',
 ], function ($router) {
@@ -26,6 +25,17 @@ Route::group([
 // start categorias
 Route::get('categories', 'CategoriesController@index');
 Route::post('categories', 'CategoriesController@store');
+Route::put('categories/{id}', 'CategoriesController@update');
 Route::delete('categories/{id}', 'CategoriesController@destroy');
 // end categorias
+// start productos
+Route::get('products', 'ProductsController@index');
+Route::get('products/{id}', 'ProductsController@show');
+Route::post('products', 'ProductsController@store');
+Route::put('products/{id}', 'ProductsController@update');
+Route::delete('products/{id}', 'ProductsController@destroy');
+// end productos
+// start impuestos
+Route::get('taxes', 'TaxesController@index');
+// end impuestos
 });
