@@ -1,5 +1,7 @@
 import React,{Fragment} from 'react'
 import {useDispatch} from 'react-redux'
+import Order from './Order.jsx'
+import Payment from './Payment.jsx'
 import {
     makeStyles,
     Card,
@@ -44,40 +46,35 @@ const Invoices = () => {
   //start uses
   const dispatch = useDispatch();
   //end uses
+//start nodes
+
+//end nodes
 //start uses
 	const classes = useStyles()
 //start uses
    return(
     <Fragment>
-       <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
+    <Grid
+    container
+    direction="column"
+    justify="center"
+    alignItems="center"
     >
-             <Typography className={classes.title} variant="h5" component="h5">
-              Órden de Facturación  
-             </Typography>
+       <Typography className={classes.title} variant="h5" component="h5">
+        Órden de Facturación  
+       </Typography>
       <Card className={classes.root}>
-        <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-            algo
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
+       <CardContent>
+       <Grid
+          container
+          direction="row"
+          justify="space-evenly"
+          alignItems="center"
+        >
+        <Order/>
+        <Payment/>
+        </Grid>
+       </CardContent>
       </Card>
     </Grid>
     </Fragment>
@@ -86,3 +83,4 @@ const Invoices = () => {
 }
 
 export default Invoices;
+     
