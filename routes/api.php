@@ -13,6 +13,7 @@ Route::group([
     Route::post('logout', 'UserController@logout');
     Route::put('newPassword', 'UserController@newPassword');
 });
+Route::post('invoices', 'InvoicesController@store');
 Route::group([
     'middleware' => 'jwt.auth',
 ], function ($router) {
@@ -31,6 +32,7 @@ Route::delete('categories/{id}', 'CategoriesController@destroy');
 // start productos
 Route::get('products', 'ProductsController@index');
 Route::get('products/{id}', 'ProductsController@show');
+Route::get('products/productTax/{id}', 'ProductsController@productTax');
 Route::post('products', 'ProductsController@store');
 Route::put('products/{id}', 'ProductsController@update');
 Route::delete('products/{id}', 'ProductsController@destroy');

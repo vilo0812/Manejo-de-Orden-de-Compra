@@ -1,6 +1,8 @@
 import React,{Fragment,useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import SimpleTable from './../../SimpleTable'
+import {cerrarSessionAction} from './../../../ducks/userDuck.js'
+import { useHistory } from "react-router-dom";
 import Form from './Form.jsx'
 import Modal from './../../Modal'
 import axios from 'axios'
@@ -67,6 +69,7 @@ const Products = () => {
   'tipo de IVA',
   'cantidad',
   ]
+    let history = useHistory();
   const token = useSelector(store => store.user.session.access_token)
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`//autorizacion
   //end uses
@@ -105,6 +108,10 @@ const fetchProducts = async () => {
         setProductsData(dataProv);
       }).catch(err => {
         console.log(err);
+        if(err.response.status === 401){
+          dispatch(cerrarSessionAction())
+          history.push("/auth");
+        }
       });
 }
 const handleModal = () => {

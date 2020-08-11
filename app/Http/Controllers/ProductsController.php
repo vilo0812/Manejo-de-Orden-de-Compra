@@ -44,9 +44,9 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => 'required|string|between:2,100',
-            'unit_price' => 'required|numeric|between:2,100',
-            'quantity' => 'required|numeric|between:2,100',
+            'description' => 'required|string',
+            'unit_price' => 'required|numeric',
+            'quantity' => 'required|numeric',
             'provider_id' => 'required|numeric',
             'category_id' => 'required|numeric',
             'tax_id' => 'required|numeric',
@@ -74,6 +74,13 @@ class ProductsController extends Controller
          $product = Products::findOrFail($id);
         return response()->json($product,200);
     }
+    public function productTax($id)
+    {
+         $product = Products::findOrFail($id);
+         $product->tax;
+        return response()->json($product,200);
+    }
+    
 
     /**
      * Show the form for editing the specified resource.

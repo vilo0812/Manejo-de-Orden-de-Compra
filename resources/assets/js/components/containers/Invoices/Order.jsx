@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import AddIcon from '@material-ui/icons/Add';
-import Product from './Product.jsx'
 import {
     makeStyles,
     Card,
@@ -47,36 +46,12 @@ import {
   }
   }))
 //end useStyles
-const Order = () =>{
+const Order = ({getPayment,handleInputs, product, productError,quantity_product_soldError}) =>{
 //start uses
-  const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
   const classes = useStyles()
-  const [inputs, setInputs] = useState({//inputs
-    product:''
-  });
-  const [productError, setProductError] = useState({
-      error:false,
-      message:''
-  });
-  const [count, setCount] = useState([1]);
 //start uses
+//start methods
+//end methodss
   return(
     <Card className={classes.root}>
           <Typography className={classes.title} variant="h6" gutterBottom>
@@ -86,18 +61,34 @@ const Order = () =>{
               y la cantidad que desea 
           </Typography>
         <CardContent>
-        {
-          count.map((option, index) => (
-              <Product key={index}/>
-          ))
-        }
+          <Box my={3}>
+              <TextField
+              fullWidth
+                id="product_id"
+                name="product_id"
+                select
+                label="Seleccionar Producto"
+                SelectProps={{
+                  native: true,
+                }}
+                onChange={(e) => handleInputs(e)}
+                variant="outlined"
+                error={productError.error} 
+                helperText={productError.message}
+                defaultValue={product[0]}
+                onBlur={()=> getPayment()}
+              >
+                {product.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+          </Box>
+          <Box my={3}>
+                <TextField type="number" onBlur={()=> getPayment()} onFocus={(e) => getPayment()} onChange={(e) => handleInputs(e)} fullWidth id="quantity_product_sold" key="quantity_product_sold" label="Cantidad de Productos" variant="outlined" name="quantity_product_sold" error={quantity_product_soldError.error} helperText={quantity_product_soldError.message}/>
+          </Box>
         </CardContent>
-        <CardActions>
-          <Button onClick={() => setCount([...count, 1])} size="small" color="primary">
-          <AddIcon></AddIcon>
-          Añadir Producto
-          </Button>
-        </CardActions>
       </Card>
       );
 }

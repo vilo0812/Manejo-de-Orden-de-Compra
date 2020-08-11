@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {
     makeStyles,
     Card,
@@ -48,7 +48,7 @@ import {
   }
   }))
 //end useStyles
-const Payment = () =>{
+const Payment = ({submit,price_unit,IVA,sub_total,total,tax_IVA}) =>{
 //start uses
   const classes = useStyles()
 //start uses
@@ -64,11 +64,28 @@ const Payment = () =>{
               >
               <Grid item sm={6}>
                 <Typography variant="h6" gutterBottom>
+                  Precio Unitario
+              </Typography>
+              </Grid>
+              <Grid item sm={6}>
+              <TextField id="price_unit" label="Precio Unitario" variant="filled" value={price_unit}/>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box my={3}>
+            <Grid
+              container
+              direction="row"
+              justify="space-around"
+              alignItems="center"
+              >
+              <Grid item sm={6}>
+                <Typography variant="h6" gutterBottom>
                   taza de IVA
               </Typography>
               </Grid>
               <Grid item sm={6}>
-              <TextField id="filled-basic" label="taza de IVA" variant="filled" value={300}/>
+              <TextField id="rate_type_IVA" label="taza de IVA" variant="filled" value={IVA}/>
               </Grid>
             </Grid>
           </Box>
@@ -85,7 +102,7 @@ const Payment = () =>{
               </Typography>
               </Grid>
               <Grid item sm={6}>
-              <TextField id="filled-basic" label="taza de IVA" variant="filled" value={300}/>
+              <TextField id="sub-total" label="sub total" variant="filled" value={sub_total}/>
               </Grid>
             </Grid>
           </Box>
@@ -102,7 +119,7 @@ const Payment = () =>{
               </Typography>
               </Grid>
               <Grid item sm={6}>
-              <TextField id="filled-basic" label="taza de IVA" variant="filled" value={300}/>
+              <TextField id="tax_IVA" label="impuesto de IVA" variant="filled" value={tax_IVA}/>
               </Grid>
             </Grid>
           </Box>
@@ -119,14 +136,15 @@ const Payment = () =>{
               </Typography>
               </Grid>
               <Grid item sm={8}>
-              <TextField fullWidth id="filled-basic" label="taza de IVA" variant="filled" value={300}/>
+              <TextField fullWidth id="total" label="Total" variant="filled" value={total}/>
               </Grid>
             </Grid>
           </Box>
           
         </CardContent>
+        
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button onClick={() => submit()} fullWidth variant="contained" color="primary">Ordenar Factura</Button>
         </CardActions>
       </Card>
       );

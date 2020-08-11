@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Taxes;
 use Illuminate\Database\Eloquent\Model;
 
 class Products extends Model
@@ -15,4 +16,7 @@ class Products extends Model
         'category_id',
         'tax_id',
     ];
+    public function tax(){
+      return $this->belongsTo(Taxes::class);
+    }
 }

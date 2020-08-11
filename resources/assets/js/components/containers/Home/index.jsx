@@ -7,8 +7,10 @@ import {
     CardContent,
     Button,
     Typography,
-    Grid
+    Grid,
+    CardMedia
 } from '@material-ui/core'
+import {Link} from 'react-router-dom'
 import {
   deepOrange,
 } from '@material-ui/core/colors';
@@ -17,6 +19,10 @@ import {
   	fondo:{
   		background : deepOrange[500]
   	},
+    item:{
+      background : '#ffff',
+      margin:'5px',
+    },
     root: {
   minWidth: 950,
   background : '#ffee58',
@@ -38,6 +44,33 @@ import {
   pos: {
     marginBottom: 12,
   },
+  media1:{
+    backgroundImage : "url('./../../images/backgrounds/imagen7.png')",
+      backgroundSize:'cover',
+      backgroundPosition: 'center',
+      height : '100px'
+  },
+  media2:{
+    backgroundImage : "url('./../../images/backgrounds/imagen8.png')",
+      backgroundSize:'cover',
+      backgroundPosition: 'center',
+      height : '100px'
+  },
+  media3:{
+    backgroundImage : "url('./../../images/backgrounds/imagen9.png')",
+      backgroundSize:'cover',
+      backgroundPosition: 'center',
+      height : '100px'
+  },
+  media4:{
+    backgroundImage : "url('./../../images/backgrounds/imagen10.png')",
+      backgroundSize:'cover',
+      backgroundPosition: 'center',
+      height : '100px'
+  },
+  boton:{
+    width : '100%'
+  }
   }))
 //end useStyles
 const Home = () => {
@@ -59,24 +92,92 @@ const Home = () => {
              </Typography>
       <Card className={classes.root}>
         <CardContent>
-          <Typography color="textSecondary" gutterBottom>
-            Word of the Day
-          </Typography>
-          <Typography variant="h5" component="h2">
-            algo
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            adjective
-          </Typography>
-          <Typography variant="body2" component="p">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
+            <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          > 
+          <Grid item sm={6} xs={12}>
+            <Card className={classes.item}>
+            <CardContent>
+                <CardMedia
+                    className={classes.media1}
+                    title="Administración de elementos básicos"
+                  />
+                    <h1>
+                      Administración de elementos básicos
+                    </h1>
+                    <h2>- Proovedores</h2>
+                <CardActions>
+                <Link to="/providers" className={classes.boton}>
+                  <Button  fullWidth variant="contained" color="primary">Proveedores</Button>
+                </Link>
+                </CardActions>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className={classes.item}>
+              <CardContent>
+                <CardMedia
+                    className={classes.media2}
+                    title="Administración de elementos básicos"
+                  />
+                    <h1>
+                      Administración de elementos básicos
+                    </h1>
+                    <h2>- Categorias</h2>
+                <CardActions >
+                <Link to="/categories" className={classes.boton}>
+                  <Button fullWidth variant="contained" color="primary">
+                  Categorias
+                  </Button>
+                </Link>
+                </CardActions>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className={classes.item}>
+              <CardContent>
+                <CardMedia
+                    className={classes.media3}
+                    title="Administración de elementos básicos"
+                  />
+                    <h1>
+                      Administración de Productos
+                    </h1>
+                    <h2>- productos</h2>
+                <CardActions>
+                <Link to="/products" className={classes.boton}>
+                  <Button  fullWidth variant="contained" color="primary">Productos</Button>
+                </Link>
+                </CardActions>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item sm={6} xs={12}>
+            <Card className={classes.item}>
+              <CardContent>
+                <CardMedia
+                    className={classes.media4}
+                    title="Administración de elementos básicos"
+                  />
+                    <h1>
+                      Orden de Facturación
+                    </h1>
+                    <h2>- Facturación</h2>
+                <CardActions>
+                <Link to="/invoices" className={classes.boton}>
+                  <Button  fullWidth variant="contained" color="primary">Facturación</Button>
+                </Link>
+                </CardActions>
+              </CardContent>
+            </Card>
+          </Grid>
+          </Grid>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </Grid>
     </Fragment>

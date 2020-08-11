@@ -23,6 +23,10 @@ class CreateProductsInvoicesTable extends Migration
               ->nullable()
               ->constrained('invoices')
               ->onDelete('cascade');
+              $table->foreignId('user_id')
+              ->nullable()
+              ->constrained('users')
+              ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -37,6 +41,7 @@ class CreateProductsInvoicesTable extends Migration
        Schema::table('products__invoices', function (Blueprint $table) {
         $table->dropForeign(['product_id']);
         $table->dropForeign(['invoice_id']);
+        $table->dropForeign(['user_id']);
         });
         Schema::dropIfExists('products__invoices');
     }

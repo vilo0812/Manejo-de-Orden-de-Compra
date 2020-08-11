@@ -1,6 +1,8 @@
 import React,{Fragment,useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import SimpleTable from './../../SimpleTable'
+import {cerrarSessionAction} from './../../../ducks/userDuck.js'
+import { useHistory } from "react-router-dom";
 import Form from './Form.jsx'
 import Modal from './../../Modal'
 import axios from 'axios'
@@ -58,6 +60,7 @@ const Providers = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [edit, setEdit] = useState({});
+  let history = useHistory();
   let [providerData,setProviderData] = useState();//rows del datatable
   const columns=[//columnas del datatable
   'nombre',
@@ -104,6 +107,10 @@ const fetchProviders = async () => {
         setProviderData(dataProv);
       }).catch(err => {
         console.log(err);
+        if(err.response.status === 401){
+          dispatch(cerrarSessionAction())
+          history.push("/auth");
+        }
       });
 }
 const handleModal = () => {
