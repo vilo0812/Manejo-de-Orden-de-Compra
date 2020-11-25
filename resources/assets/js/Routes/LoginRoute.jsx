@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 //end useStyles
-const LoginRoute= ({history}) => {
+const LoginRoute = ({history}) => {
 // start uses
 const classes = useStyles();
 const [loading, setLoading] = React.useState(false)

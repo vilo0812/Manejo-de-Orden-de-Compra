@@ -64,7 +64,7 @@ export default function SimpleTable({columns,data,editing,removing}) {
           data == undefined ?
           'no hay registros'
           :
-          data.map((row,index) => (
+          {data.map((row,index) => (
             <TableRow key={index}>
                 {row.rows.map((item,index) => (
                 <TableCell key={index} component="th" scope="row">{item}</TableCell>
